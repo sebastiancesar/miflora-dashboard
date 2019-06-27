@@ -1,8 +1,10 @@
-import { interval, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as Paho from 'paho-mqtt/paho-mqtt';
 
 const maqiattoUrl = 'maqiatto.com';
+const thingStudioUrl = 'mqtt.thingstud.io';
+const testMosquito = 'test.mosquitto.org';
 
 class MaqiattoService {
 
@@ -13,18 +15,17 @@ class MaqiattoService {
   }
 
   connect() {
-    this.client = new Paho.Client(maqiattoUrl, Number(8883), this.TOOL_GenerateUUID());
+    this.client = new Paho.Client(testMosquito, Number(8081), this.TOOL_GenerateUUID());
     this.client.onMessageArrived = (message) => {
       console.log('message from maquiateo' , message.payloadString);
       this.observer.next(JSON.parse(message.payloadString));
     }
 
     this.client.connect({ 
-      userName: 'drafon@gmail.com',
-      password: '12345678',
+      useSSL: true,
       onSuccess: () => {
         console.log('connected');
-        this.client.subscribe('drafon@gmail.com/cherry');
+        this.client.subscribe('drafon/cherry');
       },
       onFailure: (err) => {
         console.error(err);
