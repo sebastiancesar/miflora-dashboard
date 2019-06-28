@@ -2,63 +2,57 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as Paho from 'paho-mqtt/paho-mqtt';
 
-const maqiattoUrl = 'maqiatto.com';
-const thingStudioUrl = 'mqtt.thingstud.io';
-const testMosquito = 'test.mosquitto.org';
+const flespiUrl = 'mqtt.flespi.io';
+const flespiToken = 'fGkkNsoVw2vmaXUyHocCrD3pHXoCMHPPbXZOfbzz4UM2GuqbGrDXUxbpipRSWuvV';
 
-class MaqiattoService {
-
+class FlespiService {
+  
   constructor() {
+    console.log('FlespiService constructor');
     this.observable = new Observable((observer) => {
       this.observer = observer;
     });
   }
 
   connect() {
-    this.client = new Paho.Client(testMosquito, Number(8081), this.TOOL_GenerateUUID());
-    this.client.onMessageArrived = (message) => {
-      console.log('message from maquiateo' , message.payloadString);
-      this.observer.next(JSON.parse(message.payloadString));
-    }
-
-    this.client.connect({ 
-      useSSL: true,
-      onSuccess: () => {
-        console.log('connected');
-        this.client.subscribe('drafon/cherry');
-      },
-      onFailure: (err) => {
-        console.error(err);
+    try {
+      this.client = new Paho.Client(flespiUrl, Number(443), 'drafon');
+      this.client.onMessageArrived = (message) => {
+        console.log('message from flespi' , message.payloadString);
+        this.observer.next(JSON.parse(message.payloadString));
       }
-    })
+
+      this.client.connect({ 
+        useSSL: true,
+        mqttVersion: 3,
+        userName: flespiToken,
+        onSuccess: () => {
+          console.log('connected');
+          this.client.subscribe('drafon/cherry');
+        },
+        onFailure: (err) => {
+          console.error(err);
+        }
+      })
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   getData() {
     return this.observable;
   }
-
-  TOOL_GenerateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-};
-
 }
 
 class SensorsService {
 
-  maqiattoService = new MaqiattoService();
-
+  
   constructor() {
+    this.maqiattoService = new FlespiService();
     this.maqiattoService.connect();
   }
 
   parseData(data) {
-    console.log('parseData ', data);
     return {
       light: {
         formatted: data.light + ' lx',

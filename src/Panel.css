@@ -49,12 +49,10 @@
   font-weight: bold;
 }
 
-
 .plant-description {
   display: flex;
   padding: 2rem;
   align-items: center;
-  justify-content: space-between;
 }
 
 .plant-name {

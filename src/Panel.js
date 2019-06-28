@@ -14,8 +14,6 @@ class PlantImage extends Component {
 
 class SensorsGrid extends Component {
   
-  sensorsService = new SensorsService();
-
   constructor(props) {
     super();
     this.props = props;
@@ -57,10 +55,10 @@ class PlantDescription extends Component {
 
 class Panel extends Component {
 
-  sensorsService = new SensorsService();
-
+  
   constructor(props) {
     super();
+    this.sensorsService = new SensorsService();
     this.props = props;
     this.state = { data: { light: '', moisture: '', temperature: '', fertility: '' }};
   }
@@ -77,7 +75,8 @@ class Panel extends Component {
       .subscribe((data) => {
         console.log('Panel subscribed ', data);
         this.setState({ data: data, timestamp: this.getDate() });
-      });
+      },
+      (err) => { console.error(err); });
   }
 
   componentWillUnmount() {
