@@ -1,5 +1,5 @@
 Dashboard for the Xiamoi MiFlora device hacked version. 
-Using a bluetooth2mqtt service to publish the sensor values to a cloud broker.  
+Using a [bluetooth2mqtt](https://github.com/ThomDietrich/miflora-mqtt-daemon/) service to publish the sensor values to a cloud broker.  
 
 ## The project
 
