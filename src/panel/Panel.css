@@ -1,0 +1,27 @@
+.sensors-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.plant-description {
+  display: flex;
+  padding: 2rem 1rem;
+  align-items: center;
+}
+
+.plant-name {
+  padding: 2rem;
+  text-align: right;
+  font-size: 1.5rem;
+}
+
+.plant-name .last-read {
+  font-size: 0.5rem;
+}
+
+.plant-img {
+  width: 5rem;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 2px solid green;
+}

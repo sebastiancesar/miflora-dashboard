@@ -3,17 +3,12 @@
   justify-content: center;
 }
 
-.App-logo {
-  width: 5rem;
-  pointer-events: none;
-  border-radius: 50%;
-}
-
 .content {
   display: flex;
-  background-color: #FCFCFC;
+  background-color: #FDFCFF;
   height: 90vh;
   flex-direction: column;
+  min-width: 600px;
 }
 
 .App-header {

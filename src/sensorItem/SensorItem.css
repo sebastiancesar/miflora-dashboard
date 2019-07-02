@@ -1,0 +1,73 @@
+.chart-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.sensor-realtime {
+  display: flex;
+  padding: 1rem 0;
+  align-items: center;
+  box-shadow: 0 4px 6px -6px black;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.sensor-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.sensor-action {
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: blueviolet;
+  cursor: pointer;
+}
+
+.sensor-label {
+  font-size: 1rem;
+  color: #636363;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.icon {
+  font-size: 4rem;
+  padding: 0 1rem;
+  min-width: 4rem;
+  text-align: center;
+}
+
+.light {
+  color: #DDDB68;
+}
+
+.moisture {
+  color: #8EBDDB;
+}
+
+.temp {
+  color: #E56969;
+}
+
+.fertility {
+  color: #82641B;
+}
+
+.sensor-friendly-status {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.sensor-friendly-status.good {
+  color: #388716;
+}
+
+.sensor-value {
+  font-size: 1rem;
+}
+
+.last-read {
+  font-size: .8rem;
+}
